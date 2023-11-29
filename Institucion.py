@@ -14,8 +14,8 @@ class institucion(db.Model):
          #.column() nos permite darle nombre a la columna y el tipo de dato (no den¿finidos en python sino en sqlal...) que va a contener la columna
     
     nombre=db.Column(db.String(80))
-    latitud=db.Column(db.Float(20))
-    longitud=db.Column(db.Float(20))
+    latitud = db.Column(db.Float(precision=10))
+    longitud = db.Column(db.Float(precision=10))
     direccion=db.Column(db.String(40))
     horario=db.Column(db.String(20))
     linea_tel=db.Column(db.String(10))

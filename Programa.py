@@ -22,8 +22,6 @@ class Programa:
         self.app.run(debug=True)
         
         
- 
-        
     # Renderizado del mapa
     def mostrarMapa(self):
         if request.method == "POST":
@@ -46,8 +44,8 @@ class Programa:
             #Guardar el objeto en la base de datos
             db.session.add(miInstitucion)
             db.session.commit()
-                     
-
-        return render_template('index.html', instituciones=institucion.all())
+                         
+        # Pasar las instituciones a la plantilla    
+        return render_template('index.html', instituciones=institucion.query.all())
     
 programa = Programa()
