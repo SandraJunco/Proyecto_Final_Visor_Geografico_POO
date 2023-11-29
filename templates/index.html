@@ -99,8 +99,11 @@
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var marker = L.marker([4.634060907203215, -74.18274913923244]).addTo(map);
-    </script>
+
+        {% for puntoInteres in puntosInteres %}
+		    var marker = L.marker([{{puntoInteres.latitud}}, {{puntoInteres.longitud}}]).addTo(map) 
+			    .bindPopup('<center><img src="../{{institucion.ruta_imagen}}" style="width: 290px"></center><div style="font-size: 16px; width: 310px; height:20px;text-align: center;line-height: 15px;"><b><br>{{institucion.nombre}}</b></div><br>Dirección: {{institucion.direccion}}<br>Latitud: {{institucion.latitud}}<br>Longitud: {{institucion.longitud}}<br>Horario: {{institucion.horario}}<br>Telefono: {{institucion.linea_tel}}<br>Descripcion: {{institucion.descripcion}}');
+	    {% endfor %}
 
     </script>
 
