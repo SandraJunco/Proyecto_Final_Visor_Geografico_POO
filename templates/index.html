@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maps_Instituciones</title>
+    <!-- Corrige la ruta y el tipo de imagen -->
+    <link rel="icon" type="image/png" href="static/google.png">
+    <title>Maps Instituciones Educativas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -19,9 +21,9 @@
         .add-institution-button {
             position: absolute;
             bottom: 584px;
-            left: 1110px;
-            transform: translateX(6%);
-            z-index: 1000; /* Asegura que el botón esté sobre el mapa */
+            left: 1070px;
+            transform: translateX(1%);
+            z-index: 1300; /* Asegura que el botón esté sobre el mapa */
         }
     </style>
 
@@ -34,20 +36,27 @@
 <body>
 
     <div id="map"></div>
+    <img src="static/usuario.png" alt="" style="position: absolute; top: 10px; left: 1310px; z-index: 1000; width: 50px; height: 50px;">
+    <img src="static/pos.png" alt="" style="position: absolute; top: 535px; left: 1320px; z-index: 1000; width: 40px; height: 40px;">
+    <img src="static/apre.png" alt="" style="position: absolute; top: 575px; left: 1325px; z-index: 1000; width: 40px; height: 40px;">
+    <img src="static/lupa.png" alt="" style="position: absolute; top: 505px; left: 1322px; z-index: 1000; width: 35px; height: 35px;">
+    <img src="static/for.png" alt="" style="position: absolute; top: 10px; left: 1034px; z-index: 1000; width: 35px; height: 35px;">
+    <img src="static/up.png" alt="" style="position: absolute; top: 350px; left: 1px; z-index: 1000; width: 55px; height: 280px;">
 
     <div class="container">
         <!-- Agregamos un botón para abrir la ventana emergente -->
-        <button type="button" class="btn btn-primary add-institution-button" data-bs-toggle="modal" data-bs-target="#myModal" style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);border: 2px solid rgb(169, 169, 169);" >
+        <button type="button" class="btn btn-primary add-institution-button" data-bs-toggle="modal" data-bs-target="#myModal" style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);border: 2px solid rgb(169, 169, 169);"  >
             Agregar Institución Educativa
         </button>
-
+    </div>
         <!-- Ventana emergente -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Encabezado de la ventana emergente -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Agregar Institución</h4>
+                        <h4 class="modal-title align-self-center">Agregar Institución</h4>
+                        <img src="static/for.png" alt="" style="position: absolute; top: 25px; left: 235px; z-index: 1000; width: 25px; height: 25px;">
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
@@ -86,17 +95,17 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
 
     <script>
         // Tu script Leaflet para el mapa
-        var map = L.map('map').setView([4.634060907203215, -74.18274913923244], 15);
+        var map = L.map('map').setView([4.637137028668852, -74.18111978207821], 15);
     
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+            maxZoom: 34,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
     
@@ -111,16 +120,10 @@
     
             // Crea el marcador con el icono personalizado y posición fija
             var marker = L.marker([{{ institucion.latitud }}, {{ institucion.longitud }}], { icon: customIcon }).addTo(map)
-                .bindPopup('<center><img src="../{{ institucion.ruta_imagen }}" style="width: 290px"></center><div style="font-size: 16px; width: 310px; height:20px;text-align: center;line-height: 15px;"><b><br>{{ institucion.nombre }}</b></div><br>Dirección: {{ institucion.direccion }}<br>Latitud: {{ institucion.latitud }}<br>Longitud: {{ institucion.longitud }}<br>Horario: {{ institucion.horario }}<br>Telefono: {{ institucion.linea_tel }}<br>Descripcion: {{ institucion.descripcion }}');
+            .bindPopup('<center><img src="../{{ institucion.ruta_imagen }}" style="width: 310px"></center><br><div style="font-size: 14px; width: 305px; text-align: left; line-height: 20px;"><b style="display: block; text-align: center;">{{ institucion.nombre }}</b><br><b>Dirección:</b> {{ institucion.direccion }}<br><b>Latitud:</b> {{ institucion.latitud }}<br><b>Longitud:</b> {{ institucion.longitud }}<br><b>Horario:</b> {{ institucion.horario }}<br><b>Telefono:</b> {{ institucion.linea_tel }}<br><b>Descripcion:</b> {{ institucion.descripcion }}</div>');
     
         {% endfor %}
     </script>
-    
-
-    
-    
-    
-    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
